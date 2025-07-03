@@ -98,3 +98,45 @@
       <div class="label">Minutes</div>
     </div>
     <div class="time-part">
+      <span id="seconds">0</span>
+      <div class="label">Seconds</div>
+    </div>
+  </div>
+
+  <script>
+    // Target: July 3, 2025 at 15:44 local time (Helsinki)
+    const target = new Date(2025, 6, 3, 15, 44, 0).getTime();
+
+    const dEl = document.getElementById('days');
+    const hEl = document.getElementById('hours');
+    const mEl = document.getElementById('minutes');
+    const sEl = document.getElementById('seconds');
+    const box = document.getElementById('countdown');
+
+    function update() {
+      const now  = Date.now();
+      const diff = target - now;
+
+      if (diff <= 0) {
+        clearInterval(timer);
+        box.innerHTML = '<div class="celebrate">It’s Time! ❤️</div>';
+        return;
+      }
+
+      const days    = Math.floor(diff / 86400000);
+      const hours   = Math.floor((diff % 86400000) / 3600000);
+      const minutes = Math.floor((diff % 3600000) / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+
+      dEl.textContent = days;
+      hEl.textContent = hours;
+      mEl.textContent = minutes;
+      sEl.textContent = seconds;
+    }
+
+    // Kick it off immediately and then every second
+    update();
+    const timer = setInterval(update, 1000);
+  </script>
+</body>
+</html>
