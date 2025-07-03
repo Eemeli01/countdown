@@ -3,65 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Countdown to My Love</title>
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* Base reset */
+    /* Mobile-first reset */
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; width: 100%; overflow: hidden; }
 
     body {
-      font-family: 'Dancing Script', cursive;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: 
+      position: relative;
+      background:
         linear-gradient(
           to bottom right,
           rgba(255,182,193,0.7),
           rgba(255,105,180,0.7)
         ),
-        url('IMG20240711190650.jpg') no-repeat center/cover;
+        url('IMG20240711190650.jpg') no-repeat center center / cover;
+      font-family: 'Dancing Script', cursive;
       color: #fff;
-      overflow: hidden;
     }
 
     #countdown {
+      position: absolute;
+      left: 50%;
+      top: 66.666%; /* 2/3 from top = 1/3 from bottom */
+      transform: translate(-50%, -50%);
+      width: 90vw;
+      max-width: 360px;
       background: rgba(0, 0, 0, 0.6);
-      padding: 30px 40px;
-      border-radius: 20px;
+      padding: 20px;
+      border-radius: 16px;
       text-align: center;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-      transform: translateY(100%); /* move down so top aligns where bottom was */
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
     #countdown h1 {
-      font-size: 2.5rem;
-      margin-bottom: 25px;
-      text-shadow: 0 0 8px rgba(0,0,0,0.8);
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+      text-shadow: 0 0 6px rgba(0,0,0,0.8);
     }
 
     .time-part {
       display: inline-block;
-      margin: 0 15px;
+      margin: 0 8px;
     }
 
     .time-part span {
       display: block;
-      font-size: 3rem;
+      font-size: 2.2rem;
+      line-height: 1;
       animation: pulse 1s infinite;
       color: #ff6b81;
     }
 
     .label {
-      font-size: 1rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-top: 5px;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
       color: #ffc9de;
     }
 
@@ -70,9 +73,8 @@
       50% { transform: scale(1.1); }
     }
 
-    /* Final message style */
     .celebrate {
-      font-size: 2.5rem;
+      font-size: 2rem;
       color: #ffdde1;
       animation: fadeIn 2s forwards;
     }
@@ -135,7 +137,6 @@
       sEl.textContent = seconds;
     }
 
-    // Kick it off immediately and then every second
     update();
     const timer = setInterval(update, 1000);
   </script>
