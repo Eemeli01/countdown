@@ -6,20 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Countdown to Meeting</title>
   <style>
-    /* Replace 'wallpaper.jpg' with the filename of your wallpaper */
     body {
       margin: 0;
       padding: 0;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background-image: url('IMG20240711190650.jpg');
-      background-size: cover;
-      background-position: center;
       font-family: Arial, sans-serif;
       color: white;
       text-shadow: 0 0 10px rgba(0,0,0,0.7);
+      background: #222;
+      background-image: url('IMG20240711190650.jpg');
+      background-size: cover;
+      background-position: center;
     }
     #countdown {
       background: rgba(0, 0, 0, 0.5);
@@ -28,7 +28,7 @@
       text-align: center;
     }
     #countdown h1 {
-      margin: 0 0 20px;
+      margin-bottom: 20px;
       font-size: 2rem;
     }
     .time-part {
@@ -59,6 +59,7 @@
     </div>
     <div class="time-part">
       <span id="minutes">0</span>
+      <div class="label">Minutes</span>
       <div class="label">Minutes</div>
     </div>
     <div class="time-part">
@@ -68,33 +69,37 @@
   </div>
 
   <script>
-    // Target: July 3, 2025, 03:44 UTC
-    const targetTime = Date.UTC(2025, 6, 3, 3, 44, 0);
+    document.addEventListener('DOMContentLoaded', function() {
+      const targetTime = Date.UTC(2025, 6, 3, 3, 44, 0);
+      const daysEl    = document.getElementById('days');
+      const hoursEl   = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const diff = targetTime - now;
+      function updateCountdown() {
+        const now  = Date.now();
+        const diff = targetTime - now;
 
-      if (diff <= 0) {
-        document.getElementById('countdown').innerHTML = '<h1>It's Time! ❤️</h1>';
-        clearInterval(intervalId);
-        return;
+        if (diff <= 0) {
+          clearInterval(intervalId);
+          document.getElementById('countdown').innerHTML = "<h1>It's Time! ❤️</h1>";
+          return;
+        }
+
+        const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours   = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        daysEl.textContent    = days;
+        hoursEl.textContent   = hours;
+        minutesEl.textContent = minutes;
+        secondsEl.textContent = seconds;
       }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      document.getElementById('days').textContent = days;
-      document.getElementById('hours').textContent = hours;
-      document.getElementById('minutes').textContent = minutes;
-      document.getElementById('seconds').textContent = seconds;
-    }
-
-    // Update every second
-    const intervalId = setInterval(updateCountdown, 1000);
-    updateCountdown();
+      const intervalId = setInterval(updateCountdown, 1000);
+      updateCountdown();
+    });
   </script>
 </body>
 </html>
