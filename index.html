@@ -4,51 +4,87 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Countdown to Meeting</title>
+  <title>Countdown to My Love</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
+    /* Base reset */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
-      padding: 0;
+      font-family: 'Dancing Script', cursive;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
-      color: white;
-      text-shadow: 0 0 10px rgba(0,0,0,0.7);
-      background: #222;
-      background-image: url('IMG20240711190650.jpg');
-      background-size: cover;
-      background-position: center;
+      background: 
+        linear-gradient(
+          to bottom right,
+          rgba(255,182,193,0.7),
+          rgba(255,105,180,0.7)
+        ),
+        url('IMG20240711190650.jpg') no-repeat center/cover;
+      color: #fff;
+      overflow: hidden;
     }
+
     #countdown {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px 40px;
+      border-radius: 20px;
       text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
     }
+
     #countdown h1 {
-      margin-bottom: 20px;
-      font-size: 2rem;
+      font-size: 2.5rem;
+      margin-bottom: 25px;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
     }
+
     .time-part {
       display: inline-block;
-      margin: 0 10px;
+      margin: 0 15px;
     }
+
     .time-part span {
       display: block;
-      font-size: 2.5rem;
+      font-size: 3rem;
+      animation: pulse 1s infinite;
+      color: #ff6b81;
     }
+
     .label {
       font-size: 1rem;
       text-transform: uppercase;
       letter-spacing: 1px;
+      margin-top: 5px;
+      color: #ffc9de;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Final message style */
+    .celebrate {
+      font-size: 2.5rem;
+      color: #ffdde1;
+      animation: fadeIn 2s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
   <div id="countdown">
-    <h1>Time Until I See My Girlfriend</h1>
+    <h1>Counting Down to Our Moment ❤️</h1>
     <div class="time-part">
       <span id="days">0</span>
       <div class="label">Days</div>
@@ -62,44 +98,3 @@
       <div class="label">Minutes</div>
     </div>
     <div class="time-part">
-      <span id="seconds">0</span>
-      <div class="label">Seconds</div>
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('Script loaded');
-      const targetTime = Date.UTC(2025, 6, 3, 3, 44, 0);
-      const daysEl    = document.getElementById('days');
-      const hoursEl   = document.getElementById('hours');
-      const minutesEl = document.getElementById('minutes');
-      const secondsEl = document.getElementById('seconds');
-
-      function updateCountdown() {
-        const now  = Date.now();
-        const diff = targetTime - now;
-        if (diff <= 0) {
-          clearInterval(intervalId);
-          document.getElementById('countdown').innerHTML = "<h1>It's Time! ❤️</h1>";
-          console.log('Countdown finished');
-          return;
-        }
-        const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours   = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        daysEl.textContent    = days;
-        hoursEl.textContent   = hours;
-        minutesEl.textContent = minutes;
-        secondsEl.textContent = seconds;
-        console.log(`T-minus ${days}d ${hours}h ${minutes}m ${seconds}s`);
-      }
-
-      const intervalId = setInterval(updateCountdown, 1000);
-      updateCountdown();
-    });
-  </script>
-</body>
-</html>
