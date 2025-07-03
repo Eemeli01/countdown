@@ -36,6 +36,7 @@
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      transform: translateY(100%); /* move down so top aligns where bottom was */
     }
 
     #countdown h1 {
@@ -104,8 +105,8 @@
   </div>
 
   <script>
-    // Target: July 3, 2025 at 15:44 local time (Helsinki)
-    const target = new Date(2025, 6, 3, 15, 44, 0).getTime();
+    // Target: July 3, 2025 at 15:44 UTC
+    const target = Date.UTC(2025, 6, 3, 15, 44, 0);
 
     const dEl = document.getElementById('days');
     const hEl = document.getElementById('hours');
